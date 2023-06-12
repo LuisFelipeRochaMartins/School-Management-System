@@ -11,7 +11,7 @@ public class ListSubjects {
 
     }
 
-    public ListSubjects(List<Subjects> list) {
+    public ListSubjects(List<Subjects> list){
         this.list = list;
     }
 
@@ -23,19 +23,10 @@ public class ListSubjects {
         this.list = list;
     }
 
-    public void addSubjects(Subjects subjects){
-        list.add(subjects);
-    }
-
-    public void removeSubjects(Subjects subjects){
-        list.remove(subjects);
-    }
-
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ListSubjects{");
-        sb.append("list=").append(list);
-        sb.append('}');
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Lista de Disciplinas = ").append(list);
         return sb.toString();
     }
 }

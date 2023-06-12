@@ -1,6 +1,7 @@
 package com.example.sigga.teacher;
 
 import com.example.sigga.student.StudentRepository;
+import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,7 +76,7 @@ public class TeacherService {
      * @param email     String - Email do Professor
      */
     @Transactional
-    public void updateTeacher(Long teacherId, String name, String email){
+    public void updateTeacher(Long teacherId, @Nullable String name, @Nullable String email){
         Teacher teacher = teacherRepository.findById(teacherId)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Teacher with id = " + teacherId + " does not exists"
@@ -83,7 +84,7 @@ public class TeacherService {
         if(name != null && name.length() > 0 && !Objects.equals(teacher.getName(), name)){
             teacher.setName(name);
         }
-        if(email != null & email.length() > 0 && !Objects.equals(teacher.getEmail(), email)){
+        if(email != null && email.length() > 0 && !Objects.equals(teacher.getEmail(), email)){
             teacher.setEmail(email);
         }
     }

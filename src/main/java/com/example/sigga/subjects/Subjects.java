@@ -1,10 +1,6 @@
 package com.example.sigga.subjects;
 
-import com.example.sigga.student.ListStudent;
-import com.example.sigga.student.Student;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 @Table
@@ -22,24 +18,26 @@ public class Subjects {
     private Long id;
     private Long teacherId;
     private Long departmentId;
+    private String name;
     private String description;
-    private ListStudent students;
 
     public Subjects() {
 
     }
 
-    public Subjects(Long id, Long teacherId, Long departmentId, String description) {
-        this.id = id;
-        this.teacherId = teacherId;
+    public Subjects(Long id, Long teacherId, Long departmentId, String name, String description) {
+        this.id           = id;
+        this.teacherId    = teacherId;
         this.departmentId = departmentId;
-        this.description = description;
+        this.name         = name;
+        this.description  = description;
     }
 
-    public Subjects(Long teacherId, Long departmentId, String description) {
-        this.teacherId = teacherId;
+    public Subjects(Long teacherId, Long departmentId, String name, String description) {
+        this.teacherId    = teacherId;
         this.departmentId = departmentId;
-        this.description = description;
+        this.name         = name;
+        this.description  = description;
     }
 
     public Long getId() {
@@ -66,6 +64,14 @@ public class Subjects {
         this.departmentId = departmentId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -74,20 +80,13 @@ public class Subjects {
         this.description = description;
     }
 
-    public ListStudent getStudents() {
-        return students;
-    }
-
-    public void setStudents(ListStudent students) {
-        this.students = students;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Id do Disciplina").append(id);
         sb.append("Id do Professor").append(teacherId);
         sb.append("Departamento = ").append(departmentId);
+        sb.append("Nome = ").append(name);
         sb.append("Descrição = ").append(description);
         return sb.toString();
     }
