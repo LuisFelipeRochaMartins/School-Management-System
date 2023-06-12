@@ -16,7 +16,17 @@ public class Department {
             strategy  = GenerationType.SEQUENCE,
             generator = "sequence_department"
     )
+
+    @Column(
+            name = "department_id"
+    )
     private Long id;
+
+    @Column(
+            name = "teacher_id"
+    )
+    @OneToOne(cascade = CascadeType.ALL)
+    @
     private Long TeacherId;
 
     public Department() {

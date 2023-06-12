@@ -18,9 +18,27 @@ public class Teacher {
             strategy  = GenerationType.SEQUENCE,
             generator = "teacher_sequence"
     )
+
+    @Column(
+            name = "teacher_id",
+            nullable = false,
+            updatable = false
+    )
     private Long id;
+
+    @Column(
+            name = "teacher_name"
+    )
     private String name;
+
+    @Column(
+            name = "teacher_email"
+    )
     private String email;
+
+    @Column(
+            name = "teacher_datebirth"
+    )
     private LocalDate dob;
     private Integer age;
 

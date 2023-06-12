@@ -18,9 +18,28 @@ public class Student {
             strategy  = GenerationType.SEQUENCE,
             generator = "student_sequence"
     )
+
+    @Column(
+            name = "student_id",
+            nullable = false,
+            updatable = false
+    )
     private Long id;
+
+    @Column(
+            name = "student_name",
+            nullable = false
+    )
     private String name;
+
+    @Column(
+            name = "student_email"
+    )
     private String email;
+
+    @Column(
+            name = "student_datebirth"
+    )
     private LocalDate dob;
     private Integer age;
 

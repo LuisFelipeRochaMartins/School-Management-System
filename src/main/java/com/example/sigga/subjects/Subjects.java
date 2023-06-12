@@ -15,10 +15,43 @@ public class Subjects {
             strategy  = GenerationType.SEQUENCE,
             generator = "subjects_sequence"
     )
+
+    @Column(
+            name = "subjects_id",
+            nullable = false,
+            updatable = false
+
+    )
     private Long id;
+
+    @Column(
+            name = "teacher_id"
+    )
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "teacher_id",
+            referencedColumnName = "teacher_id"
+    )
     private Long teacherId;
+
+    @Column(
+            name = "department_id"
+    )
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "department_id",
+            referencedColumnName = "departmeent_id"
+    )
     private Long departmentId;
+
+    @Column(
+            name = "subject_name"
+    )
     private String name;
+
+    @Column(
+            name = "subject_description"
+    )
     private String description;
 
     public Subjects() {
