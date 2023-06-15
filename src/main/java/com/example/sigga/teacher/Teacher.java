@@ -18,11 +18,8 @@ public class Teacher {
             strategy  = GenerationType.SEQUENCE,
             generator = "teacher_sequence"
     )
-
     @Column(
-            name = "teacher_id",
-            nullable = false,
-            updatable = false
+            name = "id"
     )
     private Long id;
 
@@ -32,7 +29,7 @@ public class Teacher {
     private String name;
 
     @Column(
-            name = "teacher_email"
+            name =  "teacher_email"
     )
     private String email;
 
@@ -40,6 +37,10 @@ public class Teacher {
             name = "teacher_datebirth"
     )
     private LocalDate dob;
+
+    @Column(
+            name = "teacher_age"
+    )
     private Integer age;
 
     public Teacher() {
@@ -105,7 +106,7 @@ public class Teacher {
         sb.append("Id = ").append(id).append("\n");
         sb.append("Nome do Professor").append(name).append("\n");
         sb.append("Email do Professor").append(email).append("\n");
-        sb.append("Idade").append(getAge()).append("\n");
+        sb.append("Idade").append(age).append("\n");
         sb.append("Data de Nascimento").append(dob);
         return sb.toString();
     }

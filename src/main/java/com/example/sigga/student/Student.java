@@ -41,6 +41,10 @@ public class Student {
             name = "student_datebirth"
     )
     private LocalDate dob;
+
+    @Column(
+            name  = "student_age"
+    )
     private Integer age;
 
     public Student() {

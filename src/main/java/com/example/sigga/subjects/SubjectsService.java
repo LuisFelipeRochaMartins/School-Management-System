@@ -1,5 +1,7 @@
 package com.example.sigga.subjects;
 
+import com.example.sigga.department.Department;
+import com.example.sigga.teacher.Teacher;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,12 +61,12 @@ public class SubjectsService {
      * altera as seguintes colunas: Id do Professor, Id do Departamento, descrição da disciplina
      *
      * @param subjectId     Long - Id da Disciplina
-     * @param teacherId     Long - Id do Professor
-     * @param departmentId  Long - Id do Departamento
+     * @param teacher     Long - Id do Professor
+     * @param department  Long - Id do Departamento
      * @param description   String - Descrição da disciplina.
      */
     @Transactional
-    public void updateSubject(Long subjectId, Long teacherId, Long departmentId, String description){
+    public void updateSubject(Long subjectId, Teacher teacher, Department department, String description){
         Subjects subjects = subjectsRepository.findById(subjectId)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Subject with id " + subjectId + "does not exists"
@@ -73,12 +75,12 @@ public class SubjectsService {
             subjects.setDescription(description);
         }
 
-        if(teacherId != null && !Objects.equals(subjects.getTeacherId(), teacherId)){
-            subjects.setTeacherId(teacherId);
+        if(teacher != null && !Objects.equals(subjects.getTeacherId(), teacher)){
+            subjects.setTeacherId(teacher);
         }
 
-        if(departmentId != null && !Objects.equals(subjects.getDepartmentId(), departmentId)){
-            subjects.setDepartmentId(departmentId);
+        if(department != null && !Objects.equals(subjects.getDepartmentId(), department)){
+            subjects.setDepartmentId(department);
         }
     }
 }

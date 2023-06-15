@@ -1,5 +1,6 @@
 package com.example.sigga.department;
 
+import com.example.sigga.teacher.Teacher;
 import jakarta.persistence.*;
 
 
@@ -18,22 +19,22 @@ public class Department {
     )
 
     @Column(
-            name = "department_id"
+            name = "id"
     )
     private Long id;
 
-    @Column(
-            name = "teacher_id"
-    )
     @OneToOne(cascade = CascadeType.ALL)
-    @
-    private Long TeacherId;
+    @JoinColumn(
+            name = "teacher_id",
+            referencedColumnName = "id"
+    )
+    private Teacher TeacherId;
 
     public Department() {
 
     }
 
-    public Department(Long id, Long teacherId) {
+    public Department(Long id, Teacher teacherId) {
         this.id = id;
         TeacherId = teacherId;
     }
@@ -46,11 +47,11 @@ public class Department {
         this.id = id;
     }
 
-    public Long getTeacherId() {
+    public Teacher getTeacherId() {
         return TeacherId;
     }
 
-    public void setTeacherId(Long teacherId) {
+    public void setTeacherId(Teacher teacherId) {
         TeacherId = teacherId;
     }
 

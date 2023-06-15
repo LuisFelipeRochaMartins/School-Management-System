@@ -1,5 +1,7 @@
 package com.example.sigga.subjects;
 
+import com.example.sigga.department.Department;
+import com.example.sigga.teacher.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,8 +59,8 @@ public class SubjectsController {
     @PutMapping(path = "{studentId}")
     public void updateSubjects(
             @PathVariable("studentId") Long studentId,
-            @RequestParam(required = false) Long teacherId,
-            @RequestParam(required = false) Long departmentId,
+            @RequestParam(required = false) Teacher teacherId,
+            @RequestParam(required = false) Department departmentId,
             @RequestParam(required = false) String description){
             subjectsService.updateSubject(studentId, teacherId, departmentId, description);
     }

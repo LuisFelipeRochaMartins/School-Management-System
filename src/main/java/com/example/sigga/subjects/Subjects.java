@@ -1,5 +1,7 @@
 package com.example.sigga.subjects;
 
+import com.example.sigga.department.Department;
+import com.example.sigga.teacher.Teacher;
 import jakarta.persistence.*;
 
 @Entity
@@ -24,25 +26,19 @@ public class Subjects {
     )
     private Long id;
 
-    @Column(
-            name = "teacher_id"
-    )
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "teacher_id",
-            referencedColumnName = "teacher_id"
+            referencedColumnName = "id"
     )
-    private Long teacherId;
+    private Teacher teacherId;
 
-    @Column(
-            name = "department_id"
-    )
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "department_id",
-            referencedColumnName = "departmeent_id"
+            referencedColumnName = "id"
     )
-    private Long departmentId;
+    private Department departmentId;
 
     @Column(
             name = "subject_name"
@@ -58,7 +54,7 @@ public class Subjects {
 
     }
 
-    public Subjects(Long id, Long teacherId, Long departmentId, String name, String description) {
+    public Subjects(Long id, Teacher teacherId, Department departmentId, String name, String description) {
         this.id           = id;
         this.teacherId    = teacherId;
         this.departmentId = departmentId;
@@ -66,7 +62,7 @@ public class Subjects {
         this.description  = description;
     }
 
-    public Subjects(Long teacherId, Long departmentId, String name, String description) {
+    public Subjects(Teacher teacherId, Department departmentId, String name, String description) {
         this.teacherId    = teacherId;
         this.departmentId = departmentId;
         this.name         = name;
@@ -81,19 +77,19 @@ public class Subjects {
         this.id = id;
     }
 
-    public Long getTeacherId() {
+    public Teacher getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(Long teacherId) {
+    public void setTeacherId(Teacher teacherId) {
         this.teacherId = teacherId;
     }
 
-    public Long getDepartmentId() {
+    public Department getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Long departmentId) {
+    public void setDepartmentId(Department departmentId) {
         this.departmentId = departmentId;
     }
 
