@@ -1,6 +1,5 @@
 package com.example.sigga.student;
 
-import com.example.sigga.student.Student;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,7 @@
 package com.example.sigga.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -24,10 +22,8 @@ public class StudentController {
      * @return List<Student> - Todos os registros de Estudante.
      */
     @GetMapping
-    public String getStudents(Model model){
-        List<Student> list = studentService.getStudents();
-        model.addAttribute(list);
-        return "studentView";
+    public List<Student> getStudents(){
+        return studentService.getStudents();
     }
 
     /**
