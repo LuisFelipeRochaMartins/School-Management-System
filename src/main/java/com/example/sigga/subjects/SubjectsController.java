@@ -41,7 +41,7 @@ public class SubjectsController {
     /**
      * Através de um requisição DELETE, faz a exclusão de uma disciplina
      *
-     * @param subjectId
+     * @param subjectId - Id da Disciplina
      */
     @DeleteMapping(path = "subjectId")
     public void deleteSubject(@PathVariable("{subjectId}") Long subjectId){
@@ -51,18 +51,14 @@ public class SubjectsController {
     /**
      * Através de uma requisição PUT, faz a alteração de uma disciplina.
      *
-     * @param studentId
-     * @param teacherId
-     * @param departmentId
-     * @param description
+     * @param studentId - Long - Id da Disciplina a ser alterada.
+     * @param subjects  - Subjects - Disciplina.
      */
     @PutMapping(path = "{studentId}")
     public void updateSubjects(
             @PathVariable("studentId") Long studentId,
-            @RequestParam(required = false) Teacher teacherId,
-            @RequestParam(required = false) Department departmentId,
-            @RequestParam(required = false) String description){
-            subjectsService.updateSubject(studentId, teacherId, departmentId, description);
+            @RequestBody Subjects subjects){
+            subjectsService.updateSubject(studentId, subjects);
     }
 
 }

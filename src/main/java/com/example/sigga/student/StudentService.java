@@ -29,7 +29,7 @@ public class StudentService {
     }
 
     /**
-     * Verifica se o email do Estudante está em uso, caso esteja, retorna uma mensagem, caso não inseri o
+     * Verifica se o email do Estudante está em uso, caso esteja, retorna uma mensagem, caso não insere o
      * novo estudante dentro do banco de dados.
      *
      * @param student Student - Classe do Estudante.
@@ -72,22 +72,25 @@ public class StudentService {
      * altera as seguintes colunas: email e nome.
      *
      * @param studentId Long - Id do Estudante
-     * @param name      String - Nome do Estudante
-     * @param email     String - Email do Estudante
+     * @param student - Estudante.
      */
     @Transactional
-    public void updateStudent(Long studentId, String name, String email){
-        Student student = studentRepository.findById(studentId)
+    public void updateStudent(Long studentId, Student student){
+        Student studentDB = studentRepository.findById(studentId)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Student with id = " + studentId + " does not exists"
                 ));
-        if(name != null && name.length() > 0 && !Objects.equals(student.getName(), name)){
-            student.setName(name);
+        if (student.getName() != null && !student.getName().isBlank() && !Objects.equals(studentDB.getName(), student.getName())) {
+            studentDB.setName(student.getName());
         }
 
-        if(email != null && email.length() > 0 && !Objects.equals(student.getEmail(), email)){
-            verifyEmail(email);
-            student.setEmail(email);
+        if (student.getEmail() != null && !student.getEmail().isBlank() && !Objects.equals(studentDB.getEmail(), student.getEmail())) {
+            verifyEmail(student.getEmail());
+            studentDB.setEmail(student.getEmail());
+        }
+
+        if (student.getDob() != null && !Objects.equals(studentDB.getDob(), student.getDob())) {
+            studentDB.setDob(student.getDob());
         }
     }
 }

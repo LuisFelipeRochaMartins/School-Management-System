@@ -24,7 +24,6 @@ public class TeacherController {
 
     @PostMapping
     public void registerNewTeacher(@RequestBody Teacher teacher){
-
         teacherService.addNewTeacher(teacher);
     }
 
@@ -36,8 +35,7 @@ public class TeacherController {
     @PutMapping(path = "{teacherId}")
     public void updateTeacher(
             @PathVariable("teacherId") Long teacherId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email){
-            teacherService.updateTeacher(teacherId, name, email);
+            @RequestBody Teacher teacher){
+            teacherService.updateTeacher(teacherId, teacher);
     }
 }

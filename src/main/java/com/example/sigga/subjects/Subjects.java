@@ -4,6 +4,8 @@ import com.example.sigga.department.Department;
 import com.example.sigga.teacher.Teacher;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table
 public class Subjects {
@@ -26,19 +28,16 @@ public class Subjects {
     )
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "teacher_id",
-            referencedColumnName = "id"
-    )
-    private Teacher teacherId;
+    @OneToMany
+    @JoinColumn(name = "person_id")
+    private List<Teacher> teacher;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(
             name = "department_id",
             referencedColumnName = "id"
     )
-    private Department departmentId;
+    private Department department;
 
     @Column(
             name = "subject_name"
@@ -50,23 +49,31 @@ public class Subjects {
     )
     private String description;
 
+
+    @Column(
+            name = "subject_syllabus"
+    )
+    public String syllabus;
+
     public Subjects() {
 
     }
 
-    public Subjects(Long id, Teacher teacherId, Department departmentId, String name, String description) {
+    public Subjects(Long id, List<Teacher> teacher, Department departmentId, String name, String description, String syllabus) {
         this.id           = id;
-        this.teacherId    = teacherId;
-        this.departmentId = departmentId;
+        this.teacher      = teacher;
+        this.department   = departmentId;
         this.name         = name;
         this.description  = description;
+        this.syllabus     = syllabus;
     }
 
-    public Subjects(Teacher teacherId, Department departmentId, String name, String description) {
-        this.teacherId    = teacherId;
-        this.departmentId = departmentId;
+    public Subjects(List<Teacher> teacher, Department departmentId, String name, String description, String syllabus) {
+        this.teacher      = teacher;
+        this.department   = departmentId;
         this.name         = name;
         this.description  = description;
+        this.syllabus     =  syllabus;
     }
 
     public Long getId() {
@@ -77,20 +84,20 @@ public class Subjects {
         this.id = id;
     }
 
-    public Teacher getTeacherId() {
-        return teacherId;
+    public List<Teacher> getTeacher() {
+        return teacher;
     }
 
-    public void setTeacherId(Teacher teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacher(List<Teacher> teacher) {
+        this.teacher = teacher;
     }
 
-    public Department getDepartmentId() {
-        return departmentId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(Department departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public String getName() {
@@ -109,14 +116,23 @@ public class Subjects {
         this.description = description;
     }
 
+    public String getSyllabus() {
+        return syllabus;
+    }
+
+    public void setSyllabus(String syllabus) {
+        this.syllabus = syllabus;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Id do Disciplina").append(id);
-        sb.append("Id do Professor").append(teacherId);
-        sb.append("Departamento = ").append(departmentId);
-        sb.append("Nome = ").append(name);
-        sb.append("Descrição = ").append(description);
+        sb.append("Id do Disciplina").append(id).append("\n");
+        sb.append("Id do Professor").append(teacher).append("\n");
+        sb.append("Departamento = ").append(department).append("\n");
+        sb.append("Nome = ").append(name).append("\n");
+        sb.append("Descrição = ").append(description).append("\n");
+        sb.append("Ementa = ").append(syllabus).append("\n");
         return sb.toString();
     }
 }

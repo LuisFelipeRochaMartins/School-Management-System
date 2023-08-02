@@ -27,8 +27,7 @@ public class Student {
     private Long id;
 
     @Column(
-            name = "student_name",
-            nullable = false
+            name = "student_name"
     )
     private String name;
 

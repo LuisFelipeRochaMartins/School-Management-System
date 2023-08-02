@@ -49,15 +49,13 @@ public class StudentController {
     /**
      * Através de um requisição PUT, é feita a alteração de um Estudante utilizando sua PK.
      *
-     * @param studentId Long - Id do Estudante
-     * @param name      String - Nome do Estudante
-     * @param email     String - Email do Estudante
+     * @param studentId Long   - Id do Estudante a ser alterado.
+     * @param student  Student - Estudante para alterar.
      */
     @PutMapping(path = "{studentId}")
     public void updateStudent(
             @PathVariable("studentId") Long studentId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email){
-            studentService.updateStudent(studentId, name, email);
+            @RequestBody Student student){
+            studentService.updateStudent(studentId, student);
     }
 }

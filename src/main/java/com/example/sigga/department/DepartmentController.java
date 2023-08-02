@@ -50,13 +50,13 @@ public class DepartmentController {
     /**
      * Através de uma requisição PUT, é feita a alteração dos do Professor
      *
-     * @param departmentId Long - Id do Departamento
-     * @param teacherId    Long - Id do Professor
+     * @param departmentId Long    - Id do Departamento
+     * @param teacher      Teacher - Professor Responsável pelo departamento.
      */
     @PutMapping(path = "{departmentId}")
     public void updateDepartment(
             @PathVariable("departmentId") Long departmentId,
-            @RequestParam(required = false) Teacher teacherId){
-        departmentService.updateDepartment(departmentId, teacherId);
+            @RequestBody Teacher teacher){
+        departmentService.updateDepartment(departmentId, teacher);
     }
 }

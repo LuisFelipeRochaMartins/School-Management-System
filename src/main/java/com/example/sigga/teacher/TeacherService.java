@@ -72,20 +72,19 @@ public class TeacherService {
      * altera as seguintes colunas: email e nome.
      *
      * @param teacherId Long - Id do Professor
-     * @param name      String - Nome do Professor
-     * @param email     String - Email do Professor
+
      */
     @Transactional
-    public void updateTeacher(Long teacherId, @Nullable String name, @Nullable String email){
-        Teacher teacher = teacherRepository.findById(teacherId)
+    public void updateTeacher(Long teacherId, Teacher teacher){
+        Teacher teacherDB = teacherRepository.findById(teacherId)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Teacher with id = " + teacherId + " does not exists"
                 ));
-        if(name != null && name.length() > 0 && !Objects.equals(teacher.getName(), name)){
-            teacher.setName(name);
+        if(teacher.getName() != null && !teacher.getName().isBlank() && !Objects.equals(teacherDB.getName(), teacherDB.getName())){
+            teacherDB.setName(teacher.getName());
         }
-        if(email != null && email.length() > 0 && !Objects.equals(teacher.getEmail(), email)){
-            teacher.setEmail(email);
+        if(teacher.getEmail() != null && !teacher.getEmail().isBlank() && !Objects.equals(teacherDB.getEmail(), teacher.getEmail())){
+            teacherDB.setEmail(teacher.getEmail());
         }
     }
 }

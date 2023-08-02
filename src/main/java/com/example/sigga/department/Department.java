@@ -1,7 +1,10 @@
 package com.example.sigga.department;
 
+import com.example.sigga.phase.Phase;
 import com.example.sigga.teacher.Teacher;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -23,12 +26,18 @@ public class Department {
     )
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    private String name;
+
+    @OneToOne
     @JoinColumn(
-            name = "teacher_id",
+            name = "person_id",
             referencedColumnName = "id"
     )
-    private Teacher TeacherId;
+    private Teacher Teacher;
+
+    @OneToMany
+    @JoinColumn(name = "phase_id")
+    private List<Phase> phases;
 
     public Department() {
 
@@ -36,30 +45,67 @@ public class Department {
 
     public Department(Long id, Teacher teacherId) {
         this.id = id;
-        TeacherId = teacherId;
+        Teacher = teacherId;
     }
+
+    /**
+     * Retorna o Id do Departamento
+     *
+     * @return Long - Id do Departamento
+     */
 
     public Long getId() {
         return id;
     }
 
+    /**
+     * Define o  Id do Departamento
+     *
+     * @param id Long - Id do Departamento
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Teacher getTeacherId() {
-        return TeacherId;
+    /**
+     * Retorna o Id do Departamento
+     *
+     * @return Long - Id do Professor
+     */
+    public Teacher getTeacher() {
+        return Teacher;
     }
 
-    public void setTeacherId(Teacher teacherId) {
-        TeacherId = teacherId;
+    /**
+     * Define o  Id do Departamento
+     *
+     * @param teacher Teacher - Id do Departamento
+     */
+    public void setTeacher(Teacher teacher) {
+        Teacher = teacher;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Phase> getPhases() {
+        return this.phases;
+    }
+
+    public void setPhases(List<Phase> phases) {
+        this.phases = phases;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Id = ").append(id);
-        sb.append("Teacher = ").append(TeacherId);
+        sb.append("Teacher = ").append(Teacher);
         return sb.toString();
     }
 }

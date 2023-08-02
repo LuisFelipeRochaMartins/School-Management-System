@@ -61,26 +61,24 @@ public class SubjectsService {
      * altera as seguintes colunas: Id do Professor, Id do Departamento, descrição da disciplina
      *
      * @param subjectId     Long - Id da Disciplina
-     * @param teacher     Long - Id do Professor
-     * @param department  Long - Id do Departamento
-     * @param description   String - Descrição da disciplina.
+     * @param subjects      Subjects - Disciplina.
      */
     @Transactional
-    public void updateSubject(Long subjectId, Teacher teacher, Department department, String description){
-        Subjects subjects = subjectsRepository.findById(subjectId)
+    public void updateSubject(Long subjectId, Subjects subjects){
+        Subjects subjectsDB = subjectsRepository.findById(subjectId)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Subject with id " + subjectId + "does not exists"
                 ));
-        if(description != null && description.length() > 0 && !Objects.equals(subjects.getDescription(), description)){
-            subjects.setDescription(description);
+        if (subjects.getDescription() != null && !subjects.getDescription().isBlank() && !Objects.equals(subjectsDB.getDescription(), subjects.getDescription())) {
+            subjectsDB.setDescription(subjects.getDescription());
         }
 
-        if(teacher != null && !Objects.equals(subjects.getTeacherId(), teacher)){
-            subjects.setTeacherId(teacher);
+        if (subjects.getTeacher() != null && !Objects.equals(subjectsDB.getTeacher(), subjects.getTeacher())) {
+            subjectsDB.setTeacher(subjects.getTeacher());
         }
 
-        if(department != null && !Objects.equals(subjects.getDepartmentId(), department)){
-            subjects.setDepartmentId(department);
+        if (subjects.getDepartment() != null && !Objects.equals(subjectsDB.getDepartment(), subjects.getDepartment())) {
+            subjectsDB.setDepartment(subjects.getDepartment());
         }
     }
 }

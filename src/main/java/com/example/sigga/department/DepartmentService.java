@@ -65,8 +65,8 @@ public class DepartmentService {
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Deparment with id " + departmentId + " does not exists"
                 ));
-        if(teacher != null && !Objects.equals(department.getTeacherId(), teacher)){
-            department.setTeacherId(teacher);
+        if(teacher != null && !Objects.equals(department.getTeacher(), teacher)){
+            department.setTeacher(teacher);
         }
     }
 }
