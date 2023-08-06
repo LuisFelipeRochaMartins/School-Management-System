@@ -1,7 +1,5 @@
 package com.example.sigga.subjects;
 
-import com.example.sigga.department.Department;
-import com.example.sigga.teacher.Teacher;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,14 +69,6 @@ public class SubjectsService {
                 ));
         if (subjects.getDescription() != null && !subjects.getDescription().isBlank() && !Objects.equals(subjectsDB.getDescription(), subjects.getDescription())) {
             subjectsDB.setDescription(subjects.getDescription());
-        }
-
-        if (subjects.getTeacher() != null && !Objects.equals(subjectsDB.getTeacher(), subjects.getTeacher())) {
-            subjectsDB.setTeacher(subjects.getTeacher());
-        }
-
-        if (subjects.getDepartment() != null && !Objects.equals(subjectsDB.getDepartment(), subjects.getDepartment())) {
-            subjectsDB.setDepartment(subjects.getDepartment());
         }
     }
 }

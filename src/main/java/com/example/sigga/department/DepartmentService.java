@@ -1,9 +1,7 @@
 package com.example.sigga.department;
 
-import com.example.sigga.teacher.Teacher;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -57,16 +55,12 @@ public class DepartmentService {
      * Verifica se há diferença entre o atributo do objeto e o parametro passado, faz a alteração do id do Professor
      *
      * @param departmentId Long - Id do Departamento
-     * @param teacher    Long - Id do Professor
      */
     @Transactional
-    public void updateDepartment(Long departmentId, Teacher teacher){
+    public void updateDepartment(Long departmentId){
         Department department = departmentRepository.findById(departmentId)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Deparment with id " + departmentId + " does not exists"
                 ));
-        if(teacher != null && !Objects.equals(department.getTeacher(), teacher)){
-            department.setTeacher(teacher);
-        }
     }
 }

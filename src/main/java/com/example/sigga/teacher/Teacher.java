@@ -1,113 +1,43 @@
 package com.example.sigga.teacher;
 
+import com.example.sigga.person.Person;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-import java.time.Period;
+import java.util.List;
+
+import com.example.sigga.subjects.Subjects;
 
 @Entity
 @Table
-public class Teacher {
-    @Id
-    @SequenceGenerator(
-            name           = "teacher_sequence",
-            sequenceName   = "teacher_sequence",
-            allocationSize = 1
+@PrimaryKeyJoinColumn(name = "id")
+public class Teacher extends Person {
+    @ManyToMany
+    @JoinTable(
+            name = "teacher_subjects",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "subjects_id")
     )
-    @GeneratedValue(
-            strategy  = GenerationType.SEQUENCE,
-            generator = "teacher_sequence"
-    )
-    @Column(
-            name = "id"
-    )
-    private Long id;
-
-    @Column(
-            name = "teacher_name"
-    )
-    private String name;
-
-    @Column(
-            name =  "teacher_email"
-    )
-    private String email;
-
-    @Column(
-            name = "teacher_datebirth"
-    )
-    private LocalDate dob;
-
-    @Column(
-            name = "teacher_age"
-    )
-    private Integer age;
-
+    private List<Subjects> subjects;
     public Teacher() {
 
     }
 
-    public Teacher(Long id, String name, String email, LocalDate dob) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
+    public Teacher(Long id, List<Subjects> subjects) {
+        this.subjects = subjects;
     }
 
-    public Teacher(String name, String email, LocalDate dob) {
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
+    public List<Subjects> getSubjects() {
+        return this.subjects;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
-    public Integer getAge() {
-        return Period.between(this.dob, LocalDate.now()).getYears();
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setSubjects(List<Subjects> subjects) {
+        this.subjects = subjects;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Teacher");
-        sb.append("Id = ").append(id).append("\n");
-        sb.append("Nome do Professor").append(name).append("\n");
-        sb.append("Email do Professor").append(email).append("\n");
-        sb.append("Idade").append(age).append("\n");
-        sb.append("Data de Nascimento").append(dob);
+        final StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
         return sb.toString();
     }
 }

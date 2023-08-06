@@ -1,6 +1,7 @@
 package com.example.sigga.person;
 
 import jakarta.transaction.Transactional;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,10 +13,10 @@ import java.util.Optional;
 @Service
 public class PersonService {
 
-    private final PersonRepository personRepository;
+    private final PersonRepository<Person> personRepository;
 
     @Autowired
-    public PersonService(PersonRepository personRepository) {
+    public PersonService(PersonRepository<Person> personRepository) {
         this.personRepository = personRepository;
     }
 
@@ -66,16 +67,17 @@ public class PersonService {
     }
 
     /**
+     *Altera
      *
      * @param personId Long    - Id da Pessoa
      * @param person   Person  - Nome da Pessoa
      */
 
     @Transactional
-    public void updatePerson(Long personId, Person person){
+    public void updatePerson(Long personId, @NotNull Person person) {
         Person personDB = personRepository.findById(personId)
                 .orElseThrow(() -> new IllegalArgumentException(
-                  "Person with id " + personId + " does not exists"
+                        "Person with id " + personId + " does not exists"
                 ));
         if (person.getName() != null && !person.getName().isBlank() && !Objects.equals(personDB.getName(), person.getName())){
             personDB.setName(person.getName());

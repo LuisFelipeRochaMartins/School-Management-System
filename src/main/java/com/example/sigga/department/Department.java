@@ -1,7 +1,6 @@
 package com.example.sigga.department;
 
 import com.example.sigga.phase.Phase;
-import com.example.sigga.teacher.Teacher;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -28,24 +27,22 @@ public class Department {
 
     private String name;
 
-    @OneToOne
-    @JoinColumn(
-            name = "person_id",
-            referencedColumnName = "id"
-    )
-    private Teacher Teacher;
-
-    @OneToMany
-    @JoinColumn(name = "phase_id")
-    private List<Phase> phases;
+    @OneToMany(mappedBy = "department")
+    private List<Phase> phase;
 
     public Department() {
 
     }
 
-    public Department(Long id, Teacher teacherId) {
-        this.id = id;
-        Teacher = teacherId;
+    public Department(Long id, String name, List<Phase> phases) {
+        this.id     = id;
+        this.name   = name;
+        this.phase = phases;
+    }
+
+    public Department(String name, List<Phase> phase) {
+        this.name = name;
+        this.phase = phase;
     }
 
     /**
@@ -67,24 +64,6 @@ public class Department {
         this.id = id;
     }
 
-    /**
-     * Retorna o Id do Departamento
-     *
-     * @return Long - Id do Professor
-     */
-    public Teacher getTeacher() {
-        return Teacher;
-    }
-
-    /**
-     * Define o  Id do Departamento
-     *
-     * @param teacher Teacher - Id do Departamento
-     */
-    public void setTeacher(Teacher teacher) {
-        Teacher = teacher;
-    }
-
     public String getName() {
         return name;
     }
@@ -94,18 +73,17 @@ public class Department {
     }
 
     public List<Phase> getPhases() {
-        return this.phases;
+        return phase;
     }
 
     public void setPhases(List<Phase> phases) {
-        this.phases = phases;
+        this.phase = phases;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Id = ").append(id);
-        sb.append("Teacher = ").append(Teacher);
         return sb.toString();
     }
 }

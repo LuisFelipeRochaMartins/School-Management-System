@@ -56,7 +56,7 @@ public class PersonController {
     @PutMapping(path = "{personId}")
     public void updatePerson(
             @PathVariable("personId") Long personId,
-            @RequestBody Person person){
+            @RequestBody Person person) throws Throwable{
         personService.updatePerson(personId, person);
     }
 }

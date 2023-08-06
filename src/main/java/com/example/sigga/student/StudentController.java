@@ -1,5 +1,6 @@
 package com.example.sigga.student;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,7 @@ public class StudentController {
      * @param student Student - Classe do Estudante
      */
     @PostMapping
+    @Transactional
     public void registerNewStudent(@RequestBody Student student){
         studentService.addNewStudent(student);
     }
@@ -56,6 +58,6 @@ public class StudentController {
     public void updateStudent(
             @PathVariable("studentId") Long studentId,
             @RequestBody Student student){
-            studentService.updateStudent(studentId, student);
+        studentService.updateStudent(studentId, student);
     }
 }

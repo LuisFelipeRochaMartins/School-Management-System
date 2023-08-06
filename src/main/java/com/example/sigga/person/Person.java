@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @Entity
-@Table
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @Id
     @SequenceGenerator(
@@ -21,20 +21,18 @@ public class Person {
     )
 
     @Column(
-            name = "person_id",
+            name = "id",
             nullable = false,
             updatable = false
     )
     private Long id;
 
     @Column(
-            name     = "person_name",
             nullable = false
     )
     private String name;
 
     @Column(
-            name     = "person_email",
             nullable = false
     )
     private String email;
@@ -46,6 +44,24 @@ public class Person {
 
     private Integer age;
 
+    public Person() {
+
+    }
+
+    public Person(Long id, String name, String email, LocalDate dob, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.dob = dob;
+        this.age = age;
+    }
+
+    public Person(String name, String email, LocalDate dob, Integer age) {
+        this.name = name;
+        this.email = email;
+        this.dob = dob;
+        this.age = age;
+    }
     /**
      * Retorna o Id da Pessoa
      *
@@ -133,17 +149,17 @@ public class Person {
      * @param age Integer
      */
     public void setAge(Integer age) {
-        this.age = age;
+        this.age = getAge();
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Id = ").append(id).append('\n');
+        sb.append("Id = ").append(getId()).append('\n');
         sb.append("Nome: = ").append(name).append('\n');
         sb.append("Email: = ").append(email).append('\n');
         sb.append("Data de Nascimento: = ").append(dob).append('\n');
-        sb.append("Email: = ").append(dob).append('\n');
+        sb.append("Idade = ").append(getAge());
         return sb.toString();
     }
 }

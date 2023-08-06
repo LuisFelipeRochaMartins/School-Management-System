@@ -1,12 +1,13 @@
 package com.example.sigga.person;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface PersonRepository<T extends Person> extends JpaRepository<T, Long> {
 
-    Optional<Person> findPersonByEmail(String email);
+    Optional<T> findPersonByEmail(String email);
 }

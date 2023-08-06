@@ -1,5 +1,6 @@
 package com.example.sigga.student;
 
+import com.example.sigga.person.Person;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class StudentService {
      *
      * @param student Student - Classe do Estudante.
      */
-    public void addNewStudent(@RequestBody Student student){
+    public void addNewStudent(Student student){
         verifyEmail(student.getEmail());
         studentRepository.save(student);
     }
@@ -45,7 +46,7 @@ public class StudentService {
      * @param email String - Email do Estudante
      */
     public void verifyEmail(String email){
-        Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
+        Optional<Student> studentOptional = studentRepository.findPersonByEmail(email);
 
         if(studentOptional.isPresent()){
             throw new IllegalStateException("Email taken");
@@ -76,7 +77,7 @@ public class StudentService {
      */
     @Transactional
     public void updateStudent(Long studentId, Student student){
-        Student studentDB = studentRepository.findById(studentId)
+        Student studentDB = (Student) studentRepository.findById(studentId)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Student with id = " + studentId + " does not exists"
                 ));

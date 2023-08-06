@@ -1,12 +1,13 @@
 package com.example.sigga.teacher;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.sigga.person.PersonRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface TeacherRepository extends JpaRepository<Teacher, Long> {
+@Transactional
+public interface TeacherRepository extends PersonRepository<Teacher> {
 
-    Optional<Teacher> findTeacherByEmail(String email);
 }

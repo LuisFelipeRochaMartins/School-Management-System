@@ -1,116 +1,20 @@
 package com.example.sigga.student;
 
+import com.example.sigga.person.Person;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-import java.time.Period;
-
 @Entity
-@Table
-public class Student {
-    @Id
-    @SequenceGenerator(
-            name           = "student_sequence",
-            sequenceName   = "student_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy  = GenerationType.SEQUENCE,
-            generator = "student_sequence"
-    )
-
-    @Column(
-            name = "student_id",
-            nullable = false,
-            updatable = false
-    )
-    private Long id;
-
-    @Column(
-            name = "student_name"
-    )
-    private String name;
-
-    @Column(
-            name = "student_email"
-    )
-    private String email;
-
-    @Column(
-            name = "student_datebirth"
-    )
-    private LocalDate dob;
-
-    @Column(
-            name  = "student_age"
-    )
-    private Integer age;
+@PrimaryKeyJoinColumn(name = "id")
+public class Student extends Person {
 
     public Student() {
-
-    }
-
-    public Student(Long id, String name, String email, LocalDate dob) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-    }
-
-    public Student(String name, String email, LocalDate dob) {
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
-    public Integer getAge() {
-        return Period.between(this.dob, LocalDate.now()).getYears();
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
+        super();
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Student");
-        sb.append("Id =").append(id).append("\n");
-        sb.append("Name =").append(name).append("\n");
-        sb.append("Email =").append(email).append("\n");
-        sb.append("Idade = ").append(age).append("\n");
-        sb.append("Data de Nascimento = ").append(dob).append("\n");
+        final StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
         return sb.toString();
     }
 }

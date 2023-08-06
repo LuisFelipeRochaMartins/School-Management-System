@@ -35,7 +35,7 @@ public class TeacherService {
      * @param email String - Email do Professor
      */
     public void verifyTeacherEmail(String email){
-        Optional<Teacher> teacherOptional = teacherRepository.findTeacherByEmail(email);
+        Optional<Teacher> teacherOptional = teacherRepository.findPersonByEmail(email);
 
         if(teacherOptional.isPresent()){
             throw new IllegalStateException("Email Taken");
